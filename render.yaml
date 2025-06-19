@@ -3,9 +3,9 @@ services:
     name: portfolio-backend
     runtime: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn core.wsgi:application"
+    startCommand: "gunicorn backend.wsgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: core.settings
+        value: backend.settings
       - key: SECRET_KEY
         value: ybi7rxk7h7_tvr)oy^py%x-r9a!w%tb94a)-a*(ox=tcp8^b4f
