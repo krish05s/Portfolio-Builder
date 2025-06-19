@@ -1,0 +1,69 @@
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import profileImage from '../assets/profile.png';  
+import logo from '../assets/logo.png';  
+
+ export default function Navbar(props) {
+  const userId = 1;
+  const navigate = useNavigate();
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn");
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("isLoggedIn");  
+    navigate("/login");                     
+  };
+
+  const handleProtectedClick = (path) =>{
+    if(isLoggedIn){
+      navigate(path);
+    }
+    else{
+      navigate("/login");
+      props.showAlert("Please Login First", "danger")
+    }
+  };
+  
+  const handleDownload = (e) => {
+    e.preventDefault(); // 
+    props.showAlert("Your portfolio is downloading...", 'success');
+    window.location.href = `http://127.0.0.1:8000/api/download/${userId}/`;
+};
+
+  return (
+    <nav className="navbar navbar-expand-lg px-4 navbar-dark bg-secondary">
+      <Link className="navbar-brand fw-bold" to="/">
+          <img src={logo} alt="Logo" height="60" className="rounded-circle" 
+          style={{ width: "40px", height: "40px", cursor: "pointer" }}/>
+      </Link>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse " id="navbarContent">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+          <li className="nav-item"><Link className="nav-link text-light" to="/">Home</Link></li>
+
+          <li className="nav-item"><button className="btn nav-link text-light" style={{ background: "none", border: "none", cursor: "pointer" }} 
+          onClick={() => handleProtectedClick("/basicdetails")}>Basicdetails </button></li>
+
+          <li className="nav-item"><button className="btn nav-link text-light" style={{ background: "none", border: "none", cursor: "pointer" }} 
+              onClick={() => handleProtectedClick("/maindetails")}>Maindetails</button></li>
+          <li className="nav-item"><Link className="nav-link text-light" to="/about">About</Link></li>
+        </ul>
+
+        {isLoggedIn && (
+          <div className="dropdown">
+          <img src={profileImage} alt="profile" height="40" className="rounded-circle" 
+          style={{ width: "40px", height: "40px", cursor: "pointer" }} data-bs-toggle="dropdown" />
+          <ul className="dropdown-menu dropdown-menu-end">
+            <li><button onClick={handleDownload} className="dropdown-item">Download Portfolio</button></li>
+            <li><button onClick={handleLogout} className="dropdown-item">Logout</button></li>
+          </ul>
+        </div>
+        )}
+
+      </div>
+    </nav>
+  );
+}
+
+
