@@ -135,7 +135,7 @@ export default function MainDetails(props) {
                   <label className="form-label">Project 2 :</label>
                   <input type="text" className="form-control mb-2" name='project2_title' value={formData.project2_title} onChange={handleChange} placeholder='Project Title'/>
                   <input type="text" className="form-control mb-2" name='project2_technology' value={formData.project2_technology} onChange={handleChange} placeholder='Technologies Used'/>
-                  <textarea className="form-control" name='project2_desc' value={formData.project1_desc} onChange={handleChange} placeholder="Description About Project"/>
+                  <textarea className="form-control" name='project2_desc' value={formData.project2_desc} onChange={handleChange} placeholder="Description About Project"/>
                 </div>
                 <div className="col-md-12">
                   <p className='mb-4 text-secondary'>Note: Please add recent 2 Project Data.</p>
