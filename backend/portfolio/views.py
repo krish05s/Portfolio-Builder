@@ -1,4 +1,4 @@
-import base64
+import base64, requests
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404
@@ -21,10 +21,11 @@ def download_static_page(request, user_id):
     image_instance = Image.objects.first()  # You can also filter by user if you have a relation
 
     def encode_image(image_field):
-        if image_field and image_field.path:
-            with open(image_field.path, 'rb') as img_file:
-                return f"data:image/jpeg;base64,{base64.b64encode(img_file.read()).decode()}"
-        return None
+        if image_field and image_field.url:
+            response = requests.get(image_field.url)
+            if response.status_code == 200:
+                return f"data:image/jpeg;base64,{base64.b64encode(response.content).decode()}"
+            return None
 
     profile_image_base64 = encode_image(image_instance.profile) if image_instance else None
     cover_image_base64 = encode_image(image_instance.cover_image) if image_instance else None
