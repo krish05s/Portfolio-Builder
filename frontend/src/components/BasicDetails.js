@@ -26,7 +26,7 @@ export default function BasicDetails(props) {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/basic/1/`);
+      const res = await axios.get(`https://portfolio-builder-0axj.onrender.com/api/basic/1/`);
       setFormData(res.data);
       setIsUpdating(true);
 
@@ -53,12 +53,12 @@ export default function BasicDetails(props) {
 
     try {
       if (isUpdating) {
-        await axios.put(`http://127.0.0.1:8000/api/basic/${userId}/`, data, {
+        await axios.put(`https://portfolio-builder-0axj.onrender.com/api/basic/${userId}/`, data, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         props.showAlert("Data Updated Successfully", "success");
       } else {
-        await axios.post(`http://127.0.0.1:8000/api/basic/`, data, {
+        await axios.post(`https://portfolio-builder-0axj.onrender.com/api/basic/`, data, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         props.showAlert("Form Submitted Successfully", "success");
