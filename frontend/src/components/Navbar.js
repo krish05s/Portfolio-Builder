@@ -26,7 +26,7 @@ import logo from '../assets/logo.png';
   const handleDownload = (e) => {
     e.preventDefault(); // 
     props.showAlert("Your portfolio is downloading...", 'success');
-    window.location.href = `http://127.0.0.1:8000/api/download/${userId}/`;
+    window.location.href = `https://portfolio-builder-0axj.onrender.com/api/download/${userId}/`;
 };
 
   return (
