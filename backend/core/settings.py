@@ -54,7 +54,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "https://portfolio-builder-0s.vercel.app",
 ]
 
 ALLOWED_HOSTS = ['*']  # Or use Render URL
