@@ -31,7 +31,7 @@ export default function Portfolio(props) {
         if (coverImage) formData.append('cover_image', coverImage);
 
         try {
-          const res = await axios.post('http://127.0.0.1:8000/api/images/', formData, {
+          const res = await axios.post('https://portfolio-builder-0axj.onrender.com/api/images/', formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
           console.log('Upload Success:', res.data);
@@ -44,7 +44,7 @@ export default function Portfolio(props) {
 
     const fetchImages = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:8000/api/images/');
+            const res = await axios.get('https://portfolio-builder-0axj.onrender.com/api/images/');
             console.log("Fetched image data:", res.data);  // Debug here
 
             const images = res.data;
@@ -71,7 +71,7 @@ export default function Portfolio(props) {
 const handleDownload = (e) => {
     e.preventDefault(); // 
     props.showAlert("Your portfolio is downloading...", 'success');
-    window.location.href = `http://127.0.0.1:8000/api/download/${userId}/`;
+    window.location.href = `https://portfolio-builder-0axj.onrender.com/api/download/${userId}/`;
 };
 
   return (
