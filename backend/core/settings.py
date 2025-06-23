@@ -49,7 +49,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://portfolio-builder-coral.vercel.app",
+    "https://portfolio-builder-sigma-two.vercel.app",
 ]
 
 ALLOWED_HOSTS = ['*']  # Or use Render URL
