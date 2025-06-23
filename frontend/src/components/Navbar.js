@@ -28,7 +28,7 @@ import axios from 'axios';
     e.preventDefault();
 
     try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/download/${userId}/`, {
+        const res = await axios.get(`https://portfolio-builder-i2dz.onrender.com/api/download/${userId}/`, {
           responseType: 'blob'  // Important to handle file download
         });
 
