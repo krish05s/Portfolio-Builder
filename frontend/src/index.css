@@ -1,8 +1,13 @@
 body {
-       background: linear-gradient(135deg,rgb(255, 255, 255),rgb(208, 224, 238));
+       background: linear-gradient(135deg,rgb(255, 255, 255),rgb(255, 255, 255));
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }

@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+User = get_user_model()
 
 class Basic(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
     mobile = models.CharField(max_length=12)
     overview = models.TextField()
@@ -15,6 +17,5 @@ class Basic(models.Model):
     degree = models.CharField(max_length=20)
     bio = models.CharField(max_length=100)
 
-
-def __str__(self):
-    return self.username
+    def __str__(self):
+        return self.username

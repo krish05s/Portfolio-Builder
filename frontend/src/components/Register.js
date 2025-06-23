@@ -29,6 +29,7 @@ function Register(props) {
 
     if (response.status === 201) {
       sessionStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("user_id", response.data.id);
       props.showAlert('Registration successful!', 'success');
       navigate('/');
     }

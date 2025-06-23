@@ -1,83 +1,136 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ basic.username }} - Portfolio</title>
+  
+  <!-- Styles -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   <style>
-    html {
-      scroll-behavior: smooth;
+    html { scroll-behavior: smooth; }
+    body { margin: 0; overflow-x: hidden; }
+
+    @media (min-width: 768px) {
+      #mainContent {
+        margin-left: 250px !important;
+        width: calc(100% - 250px) !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #mainContent {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+
+      .offcanvas-start.custom-offcanvas {
+        width: 40% !important;
+      }
+
+      #about h2, #resume h2, #contact h2 {
+        margin-left: 10px !important;
+        font-size: 1.5rem;
+      }
+
+      #about p, #resume .row, #contact .container {
+        margin-left: 0 !important;
+        padding: 0 15px;
+      }
+
+      .img-fluid {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 90% !important;
+        height: auto !important;
+      }
+
+      .fade-box {
+        margin-left: 0 !important;
+      }
+
+      h1 { font-size: 2rem !important; }
+      h2 { font-size: 1.5rem !important; }
     }
   </style>
 </head>
-<body style="margin:0;overflow-x:hidden;">
 
-  <!-- Toggle Button for Mobile -->
-  <nav class="d-md-none navbar navbar-dark bg-dark" style="position:fixed;top:0;width:100%;z-index:999;">
+<body>
+  <!-- Sidebar Desktop -->
+  <div class="d-none d-md-flex flex-column justify-content-between position-fixed top-0 start-0 h-100" style="width:250px;background:#0d1117;color:white;text-align:center;padding:20px 10px;">
+    {% if profile_image %}
+      <img src="{{ profile_image }}" alt="Logo" class="rounded-circle mb-2 mt-4" style="width:120px;height:120px;margin-left: 50px;">
+    {% endif %}
+    <h4>{{ basic.username }}</h4>
+    <div>
+      <a href="#" class="text-white mx-1"><i class="fab fa-medium-m"></i></a>
+      <a href="#" class="text-white mx-1"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-white mx-1"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <div class="mt-3">
+      <a href="#home" class="d-block py-2 text-white text-decoration-none">🏠 Home</a>
+      <a href="#about" class="d-block py-2 text-white text-decoration-none">👤 About</a>
+      <a href="#resume" class="d-block py-2 text-white text-decoration-none">📄 Resume</a>
+      <a href="#contact" class="d-block py-2 text-white text-decoration-none">📧 Contact</a>
+    </div>
+    <div class="mt-4" style="font-size:13px;">© Copyright <strong>{{ basic.username }}</strong></div>
+  </div>
+
+  <!-- Navbar Mobile -->
+  <nav class="navbar navbar-dark bg-dark d-md-none fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{ basic.username }}</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMobile">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMobile">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="collapse d-md-flex flex-column justify-content-between" id="sidebarMobile"
-       style="position:fixed;top:0;left:0;height:100vh;width:250px;background:#0d1117;color:white;text-align:center;padding:20px 10px;z-index:998;">
-    
-    <div style="margin-top:60px;" class="d-md-block d-none"></div>
-    <div>
-    {% if profile_image %}
-      <img src="{{ profile_image }}" alt="Logo" style="border-radius:50%;width:120px;height:120px;margin-bottom:30px;">
-    {% endif %}
-      <h4 style="margin-bottom:10px;">{{ basic.username }}</h4>
+  <!-- Sidebar Mobile -->
+  <div class="offcanvas offcanvas-start text-bg-dark custom-offcanvas d-md-none" tabindex="-1" id="sidebarMobile">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">{{ basic.username }}</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body text-center">
+      {% if profile_image %}
+        <img src="{{ profile_image }}" class="rounded-circle mb-3" style="width:100px;height:100px;">
+      {% endif %}
       <div>
-        <a href="#" style="color:white;margin:0 5px;"><i class="fab fa-medium-m"></i></a>
-        <a href="#" style="color:white;margin:0 5px;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="color:white;margin:0 5px;"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="text-white mx-1"><i class="fab fa-medium-m"></i></a>
+        <a href="#" class="text-white mx-1"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-white mx-1"><i class="fab fa-linkedin-in"></i></a>
       </div>
-    </div>
-
-    <div class="text" style="margin-top:10px;margin-left:50px;">
-      <a href="#home" style="display:flex;align-items:center;color:white;text-decoration:none;padding:10px;">🏠 Home</a>
-      <a href="#about" style="display:flex;align-items:center;color:white;text-decoration:none;padding:10px;">👤 About</a>
-      <a href="#resume" style="display:flex;align-items:center;color:white;text-decoration:none;padding:10px;">📄 Resume</a>
-      <a href="#contact" style="display:flex;align-items:center;color:white;text-decoration:none;padding:10px;">📧 Contact</a>
-    </div>
-
-    <div style="font-size:13px;margin-top:20px;">
-      © Copyright <strong>{{ basic.username }}</strong>
+      <div class="mt-3">
+        <a href="#home" class="d-block py-2 text-white text-decoration-none">🏠 Home</a>
+        <a href="#about" class="d-block py-2 text-white text-decoration-none">👤 About</a>
+        <a href="#resume" class="d-block py-2 text-white text-decoration-none">📄 Resume</a>
+        <a href="#contact" class="d-block py-2 text-white text-decoration-none">📧 Contact</a>
+      </div>
     </div>
   </div>
 
   <!-- Main Content -->
-  <section id="home">
-    <div id="home" style="margin-left:250px;width:100%;height:100vh;position:relative;overflow:hidden;" class="ms-md-0 ms-0" id="mainContent">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Background" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.6);"  data-aos="fade-right">
-      
+  <main id="mainContent">
+    <section id="home" style="width:100%;height:100vh;position:relative;overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Background" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.6);" data-aos="fade-right">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;text-align:center;width:90%;" data-aos="fade-up">
-        <h1 style="font-size:2.5rem;font-weight:bold;">{{ basic.username }}</h1>
-        <p style="font-size:1rem;">I'm {{ basic.bio }}</p>
+        <h1>{{ basic.username }}</h1>
+        <p>I'm {{ basic.bio }}</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about" class="container">
-      <h2 data-aos="fade-right" style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 30px; margin-left:200px; margin-top: 40px;">About</h2>
-      <p data-aos="fade-up" style="margin-left:250px; margin-bottom: 50px;">
-        {{ basic.overview }}
-      </p>
+    <section id="about" class="container mt-5">
+      <h2 data-aos="fade-right" style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 30px; margin-left: 30px; margin-top: 40px;">About</h2>
+      <p data-aos="fade-up" style="margin-left:40px; margin-bottom: 50px;">{{ basic.overview }}</p>
 
       <div class="row mt-1 align-items-center">
         <div class="col-md-5 text-center mb-3 mb-md-0" data-aos="fade-left">
         {% if cover_image %}
-          <img src="{{ cover_image  }}" alt="Profile" class="img-fluid rounded shadow" style="margin:20px auto 30px 180px; display:block; width:300px; height:350px;">
+          <img src="{{ cover_image  }}" alt="Profile" class="img-fluid rounded shadow" style="margin:20px auto 30px 40px; display:block; width:300px; height:350px;">
         {% endif %}
         </div>
 
@@ -98,11 +151,11 @@
             </div>
           </div>
       </div>
-  </section>
+    </section>
 
-  <section id="resume" class="section py-5">
-    <h2 data-aos="fade-right" style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 50px; margin-left:300px;">Resume</h2>
-    <div class="row" style="margin-left:300px;">
+    <section id="resume" class="section py-5">
+      <h2 data-aos="fade-right" style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 30px; margin-left: 30px; margin-top: 40px;">Resume</h2>
+      <div class="row" style="margin-left:60px;">
       <div class="col-md-6" data-aos="fade-up">
         <h4 class="resume-title mt-4 mb-3">Educational - Details</h4>
         <ul>
@@ -137,35 +190,20 @@
         </ul>
       </div>
     </div>
-  </section>
+    </section>
 
-  <section id="contact">
-     <h2 data-aos="fade-right" style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 90px; margin-left:300px;">Contact</h2>
-     <div class="container">
-    <div style="background-color: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px; max-width: 800px; margin: 40px auto; margin-bottom: 180px;">
-      <h2 class="text-center mb-5" data-aos="fade-up">Contact Us</h2>
-
-      <!-- Contact Info -->
-      <div style="display: flex; justify-content: space-around; margin-bottom: 70px; text-align: center;" data-aos="fade-up">
-        <div>
-          <i class="bi bi-envelope-fill" style="font-size: 28px; color: #000000;"></i>
-          <p style="margin-top: 8px; font-size: 16px;">{{basic.email}}</p>
-        </div>
-        <div>
-          <i class="bi bi-telephone-fill" style="font-size: 28px; color: #000000;"></i>
-          <p style="margin-top: 8px; font-size: 16px;">+91 {{basic.mobile}}</p>
-        </div>
-        <div>
-          <i class="bi bi-linkedin" style="font-size: 28px; color: #000000;"></i>
-          <p style="margin-top: 8px; font-size: 16px;">
-            <a href="{{ main.linkedin }}" class="text-decoration-none text-dark" target="_blank">LinkedIn Profile</a>
-          </p>
+    <section id="contact" class="pb-5">
+      <h2 data-aos="fade-right"  style="font-weight: bold; border-bottom: 3px solid #0d6efd; display: inline-block; margin-bottom: 150px; margin-left: 30px; margin-top: 40px;">Contact</h2>
+      <div class="bg-white rounded shadow p-4 mx-auto" style="max-width: 800px; margin-bottom: 200px;" data-aos="fade-up">
+        <h2 class="mb-5">Contact Us</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-4">
+          <div><i class="bi bi-envelope-fill fs-4 text-dark"></i><p class="mt-2">{{ basic.email }}</p></div>
+          <div><i class="bi bi-telephone-fill fs-4 text-dark"></i><p class="mt-2">+91 {{ basic.mobile }}</p></div>
+          <div><i class="bi bi-linkedin fs-4 text-dark"></i><p class="mt-2"><a href="{{ main.linkedin }}" target="_blank" class="text-decoration-none text-dark">LinkedIn Profile</a></p></div>
         </div>
       </div>
-
-    </div>
-  </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -173,46 +211,19 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 2000 });
+
+    // Smooth scroll on mobile nav
+    document.querySelectorAll('.offcanvas a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('sidebarMobile'));
+          offcanvas.hide();
+          setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 300);
+        }
+      });
+    });
   </script>
-
-  <!-- Mobile Responsive Patch -->
-  <style>
-    @media (max-width: 767px) {
-      #mainContent {
-        margin-left: 0 !important;
-      }
-
-      #sidebarMobile {
-        width: 100% !important;
-        padding: 10px 5px !important;
-      }
-
-      #about h2,
-      #resume h2 {
-        margin-left: 20px !important;
-      }
-
-      #about p,
-      #resume .row {
-        margin-left: 20px !important;
-      }
-
-      .fade-box {
-        margin-left: 0 !important;
-      }
-
-      .img-fluid {
-        margin-left: 0 !important;
-        height: auto !important;
-        width: 90% !important;
-      }
-
-      .text-center a {
-        display: block !important;
-        padding: 10px 0 !important;
-      }
-    }
-  </style>
-
 </body>
 </html>

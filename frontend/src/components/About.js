@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 export default function About() {
   return (
     <>
-      <div className="card mt-5" style={{width: "25rem;", height: "55rem"}}>
+      <div className="card mt-5" style={{ maxWidth: "100%", height: "auto" }}>
         <h1 className='text-center text-secondary mt-5'>About - Us</h1>
             <div className="card-body">
                 <div className='row'>

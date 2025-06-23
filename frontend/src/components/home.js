@@ -20,27 +20,37 @@ const Home = (props) => {
 
   return (
     <div className="box">
-          
-            <div className="col-md-6" style={{paddingLeft: "40px", marginTop: "150px"}}>
-              <h1 className="fw-bold"  style={{marginTop: "80px"}}>Welcome to Portfolio - Builder</h1>
-              <h3 className="text-secondary">Generates personalized portfolio websites to showcase your skills and projects.</h3>
-          
-        </div>
+  {/* Text + Buttons Section */}
+  <div className="col-md-6 col-sm-12" style={{ paddingLeft: "40px", marginTop: "150px" }}>
+    <h1 className="fw-bold" style={{ marginTop: "80px" }}>
+      Welcome to Portfolio - Builder
+    </h1>
+    <h3 className="text-secondary">
+      Generates personalized portfolio websites to showcase your skills and projects.
+    </h3>
+  </div>
 
-      <div className="d-flex align-items-center" style={{height: "15vh", paddingLeft: "20px", color: "#fff", marginBottom: "250px"}}>
+  {/* Button Section */}
+  <div className="d-flex flex-sm-row align-items-center justify-content-start gap-3"
+    style={{ height: "15vh", paddingLeft: "20px", color: "#fff", marginBottom: "250px" }}>
 
-        <button className="btn btn-primary btn-lg fw-bold mx-2" onClick={() => handleProtectedClick("/basicdetails")}>Create Portfolio</button>
+    <button className="btn btn-primary btn-lg fw-bold" onClick={() => handleProtectedClick("/basicdetails")}>
+      Create Portfolio
+    </button>
 
-        {!isLoggedIn && (
-        <button className="btn btn-outline-secondary btn-lg fw-bold" onClick={() => navigate("/register")}>Sign Up</button>
-        )}
+    {!isLoggedIn && (
+      <button className="btn btn-outline-secondary btn-lg fw-bold" onClick={() => navigate("/register")}>
+        Sign Up
+      </button>
+    )}
 
-        <div className="d-flex" style={{paddingLeft: "700px"}}>
-          <img src={cover} alt="Cover" height="40" className="rounded" style={{ width: "450px", height: "400px", cursor: "pointer"}}/>
-        </div>
-
-      </div>
+    {/* IMAGE - Only show on large screens and above */}
+    <div className="d-none d-lg-flex" style={{ paddingLeft: "700px" }}>
+      <img src={cover} alt="Cover" height="40" className="rounded" style={{ width: "450px", height: "400px", cursor: "pointer" }}/>
     </div>
+  </div>
+</div>
+
   );
 };
 

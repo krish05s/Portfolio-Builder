@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from .models import User
 
 # Create your views here.
 
@@ -18,9 +19,10 @@ class RegisterView(APIView):
         data = request.query_params  # data from URL query parameters
         serializer = RegisterSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({
+           user = serializer.save()
+           return Response({
                 "message": "User created successfully",
+                "id": user.id,
                 "status": True,
                 "data": serializer.data
             }, status=status.HTTP_201_CREATED)
@@ -30,9 +32,10 @@ class RegisterView(APIView):
         data = request.data  # data from POST body
         serializer = RegisterSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()
+            user = serializer.save()
             return Response({
                 "message": "User created successfully",
+                "id": user.id,
                 "status": True,
                 "data": serializer.data
             }, status=status.HTTP_201_CREATED)
@@ -49,7 +52,7 @@ def login_user(request):
 
         user = authenticate(username=username, password=password)
         if user:
-            return Response({"message": "Login successful"}, status=200)
+            return Response({"message": "Login successful", "id": user.id,}, status=200)
         return Response({"error": "Invalid credentials"}, status=400)
 
     elif request.method == 'GET':
@@ -59,7 +62,7 @@ def login_user(request):
 
         user = authenticate(username=username, password=password)
         if user:
-            return Response({"message": "Login successful"}, status=200)
+            return Response({"message": "Login successful", "id": user.id}, status=200)
         return Response({"error": "Invalid credentials"}, status=400)
 
     return Response({"error": "Unsupported request method"}, status=405)

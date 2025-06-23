@@ -31,6 +31,7 @@ export default function Login(props) {
       // Backend should return something like: { "message": "Login successful" }
       if (response.status === 200) {
         sessionStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("user_id", response.data.id);
         props.showAlert('Login successful!', 'success');
         navigate('/');
       }

@@ -1,8 +1,14 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
+User = get_user_model()
+
 class Main(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     # Work Experience
     company = models.CharField(max_length=100, blank=True, null=True)

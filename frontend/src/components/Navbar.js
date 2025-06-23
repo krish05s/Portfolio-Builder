@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import profileImage from '../assets/profile.png';  
-import logo from '../assets/logo.png';  
+import logo from '../assets/logo.png';
+import axios from 'axios';  
 
  export default function Navbar(props) {
-  const userId = 1;
+  const userId = parseInt(localStorage.getItem("user_id") || "0");
   const navigate = useNavigate();
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
@@ -23,11 +24,29 @@ import logo from '../assets/logo.png';
     }
   };
   
-  const handleDownload = (e) => {
-    e.preventDefault(); // 
-    props.showAlert("Your portfolio is downloading...", 'success');
-    window.location.href = `http://127.0.0.1:8000/api/download/${userId}/`;
-};
+  const handleDownload = async (e) => {
+    e.preventDefault();
+
+    try {
+        const res = await axios.get(`http://127.0.0.1:8000/api/download/${userId}/`, {
+          responseType: 'blob'  // Important to handle file download
+        });
+
+        const blob = new Blob([res.data], { type: 'application/octet-stream' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "portfolio.html";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        props.showAlert("Your portfolio is downloading...", 'success');
+      } 
+    catch (error) {
+      const msg = error.response?.data?.error || "Unable to download portfolio. Please complete all sections first.";
+      props.showAlert(msg, 'danger');
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg px-4 navbar-dark bg-secondary">

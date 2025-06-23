@@ -3,5 +3,5 @@ from .views import mainView
 
 urlpatterns = [
     path('main/', mainView.as_view(), name='main'),
-    path('main/<int:pk>/', mainView.as_view(), name='main-detail'),
+    path('main/<int:user_id>/', mainView.as_view(), name='main-detail'),
 ]
