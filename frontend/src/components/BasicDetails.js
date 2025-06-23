@@ -30,7 +30,7 @@ export default function BasicDetails(props) {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/basic/${userId}/`);
+        const res = await axios.get(`https://portfolio-builder-i2dz.onrender.com/api/basic/${userId}/`);
         setFormData(res.data);
         setIsUpdating(true);
       } catch (err) {
@@ -65,10 +65,10 @@ export default function BasicDetails(props) {
       };
 
       if (isUpdating) {
-        await axios.put(`http://127.0.0.1:8000/api/basic/${userId}/`, data, config);
+        await axios.put(`https://portfolio-builder-i2dz.onrender.com/api/basic/${userId}/`, data, config);
         props.showAlert("Data Updated Successfully", "success");
       } else {
-        await axios.post(`http://127.0.0.1:8000/api/basic/`, data, config);
+        await axios.post(`https://portfolio-builder-i2dz.onrender.com/api/basic/`, data, config);
         props.showAlert("Form Submitted Successfully", "success");
       }
 
