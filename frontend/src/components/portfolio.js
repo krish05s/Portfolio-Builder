@@ -30,7 +30,7 @@ export default function Portfolio(props) {
 
   const fetchImages = async () => {
   try {
-    const res = await axios.get(`http://127.0.0.1:8000/api/images/${userId}/`);
+    const res = await axios.get(`https://portfolio-builder-i2dz.onrender.com/api/images/${userId}/`);
     if (res.status === 200) {
       setFetchedImages(res.data);  // ✅ store response
       setIsUpdating(true);
@@ -60,13 +60,13 @@ export default function Portfolio(props) {
     try {
       let res;
       if (isUpdating) {
-        res = await axios.put(`http://127.0.0.1:8000/api/images/${userId}/`, formData, {
+        res = await axios.put(`https://portfolio-builder-i2dz.onrender.com/api/images/${userId}/`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         props.showAlert("Images updated successfully.", 'success');
       } else {
         formData.append('user', userId.toString());
-        res = await axios.post(`http://127.0.0.1:8000/api/images/`, formData, {
+        res = await axios.post(`https://portfolio-builder-i2dz.onrender.com/api/images/`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         props.showAlert("Images uploaded successfully.", 'success');
@@ -91,7 +91,7 @@ export default function Portfolio(props) {
   e.preventDefault();
 
   try {
-    const res = await axios.get(`http://127.0.0.1:8000/api/download/${userId}/`, {
+    const res = await axios.get(`https://portfolio-builder-i2dz.onrender.com/api/download/${userId}/`, {
       responseType: 'blob'  // Important to handle file download
     });
 
