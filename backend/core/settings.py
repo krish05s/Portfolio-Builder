@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-            default='postgresql://portfolio_db_8bja_user:vFbarcrAMTjwBqsFT8ItTEJYX9j7KkbM@dpg-d1cfmmh5pdvs73eq3lng-a.oregon-postgres.render.com/portfolio_db_8bja',
+            default='postgresql://mydb_0zyj_user:3MVsX5bh4GvLaad4HGWeLbWb621SUJlh@dpg-d2qi58n5r7bs73ankva0-a/mydb_0zyj',
             conn_max_age=600  # optional: enables persistent connections
 )}
 
